@@ -1,0 +1,6 @@
+{
+    "/api": {
+"target": "https://tatapw.iotblitz.com",
+"secure": false
+}
+  }

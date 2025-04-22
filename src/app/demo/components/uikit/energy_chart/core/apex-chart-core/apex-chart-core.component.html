@@ -1,0 +1,18 @@
+<apx-chart *ngIf="chartDT && chartDT.length > 0"
+  [series]="series"
+  [chart]="chart_dtls"
+  [xaxis]="xaxis"
+  [stroke]="stroke"
+  [dataLabels]="dataLabels"
+  [legend]="legend"
+  [markers]="markers"
+  [grid]="grid"
+  [yaxis]="yaxis"
+  [title]="title"
+  [tooltip]="toolTip"
+  [responsive]="responsive">
+</apx-chart>
+
+<div *ngIf="!chartDT || chartDT.length === 0" class="no-data">
+  NO DATA FOR PREVIEW
+</div>

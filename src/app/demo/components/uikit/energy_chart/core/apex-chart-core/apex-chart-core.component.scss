@@ -1,0 +1,12 @@
+.no-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 350px;  // Match the chart height
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 1px dashed #ccc;
+  }
