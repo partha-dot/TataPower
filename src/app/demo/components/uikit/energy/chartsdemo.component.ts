@@ -288,6 +288,7 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
    // console.log(wind_direction);  // Output: "NE"
 
     connectToWebSocket(c_id,d_id,d_name) {
+    this.websocketService.devsocketClose(c_id,d_id,d_name);
       this.spinner=true;
       this.websocketSubscription = this.websocketService.connect(c_id,d_id,d_name)
         .subscribe(
@@ -731,7 +732,7 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
       }
 
     ngOnDestroy() {
-      // this.websocketSubscription.unsubscribe();
+        // this.websocketService.devsocketClose();
         if (this.subscription) {
           this.subscription.unsubscribe();
       }

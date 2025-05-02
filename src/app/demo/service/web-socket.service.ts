@@ -64,7 +64,21 @@ export class WebsocketService {
       };
     });
   }
+  devsocketClose(client_id,d_id,d_name): void {
+    this.client_id=client_id;
+    this.device_id=d_id;
+    this.device=d_name;
+    const url=`${client_id}/${d_id}/${d_name}`
+    this.socket = new WebSocket(this.baseURL+url);
 
+    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+      this.socket.close();
+      this.socketStatus = false;
+      console.log('Device WebSocket disconnected');
+    } else {
+      console.log('Device WebSocket is not connected or already closed.');
+    }
+  }
   public sendMessage(message: any) {
     this.socket.send(JSON.stringify(message));
   }
