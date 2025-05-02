@@ -272,87 +272,121 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
             "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
             "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"
         ];
-
-        // Normalize the degrees to a value between 0 and 360
         const normalizedDegrees = degrees % 360;
-
-        // Calculate the index for the directions array
         const index = Math.round(normalizedDegrees / 22.5) % 16;
 
         return directions[index];
     }
+    // connectToWebSocket(c_id,d_id,d_name) {
+    // this.websocketService.devsocketClose(c_id,d_id,d_name);
+    //   this.spinner=true;
+    //   this.websocketSubscription = this.websocketService.connect(c_id,d_id,d_name)
+    //     .subscribe(
+    //       (message) => {
+    //         this.spinner=false;
+    //         console.log('Received message:', message);
+    //         const jsonString = message
+    //         const AllData: any = JSON.parse(jsonString);
+    //         console.log(AllData);
+    //         this.wsData=AllData.lastdata;
+    //         this.WeatherData = AllData.lastdata;
+    //         this.livechart = AllData.last10row;
+    //         this.livechartForGraph = AllData.last10row;
+    //         if(this.WeatherData){
+    //             this.battery_status =
+    //             this.WeatherData.ac_vol1 > 0 ||
+    //             this.WeatherData.ac_vol2 > 0 ||
+    //             this.WeatherData.ac_vol3 > 0 ||
+    //             this.WeatherData.dc_vol1 > 0 ||
+    //             this.WeatherData.dc_vol2 > 0 ||
+    //             this.WeatherData.dc_vol3 > 0;
 
-    // Example usage
-    //let wind_direction_val = 22.3;
-//let wind_direction = getWindDirection(wind_direction_val);
-   // console.log(wind_direction);  // Output: "NE"
+    //             this.lastUpdateTime=''
+    //             this.lastUpdateTime=this.convertToISTDateTime(this.WeatherData.created_at)
+    //             console.log(this.lastUpdateTime);
+    //         }
+    //         if(this.livechart?.length>0){
+    //         this.livechartForGraph.sort((a, b) => {
+    //                 return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+    //               });
+    //         this.initCharts();
+    //         }
+    //         else{
+    //         this.initCharts();
+    //         }
 
-    connectToWebSocket(c_id,d_id,d_name) {
-    this.websocketService.devsocketClose(c_id,d_id,d_name);
-      this.spinner=true;
-      this.websocketSubscription = this.websocketService.connect(c_id,d_id,d_name)
-        .subscribe(
-          (message) => {
-            this.spinner=false;
-            console.log('Received message:', message);
-            const jsonString = message
-            const AllData: any = JSON.parse(jsonString);
-            console.log(AllData);
-            this.wsData=AllData.lastdata;
-            this.WeatherData = AllData.lastdata;
-            this.livechart = AllData.last10row;
-            this.livechartForGraph = AllData.last10row;
-            if(this.WeatherData){
+    //         this.spinner=false;
+    //         // Handle received message here
+    //       },
+    //       (error) => {
+    //             if(error.status=='401'){
+    //             this.router.navigate(['/']);
+    //             debugger
+    //             }
+    //             console.log(error.status);
+    //             this.spinner=false;
+    //             console.error('WebSocket error:', error);
+    //       },
+    //       () => {
+    //         this.spinner=false;
+    //         console.log('WebSocket connection closed');
+    //       }
+    //     );
+
+    // }
+    async connectToWebSocket(c_id: number, d_id: number, d_name: string) {
+      this.spinner = true;
+    
+      await this.websocketService.devsocketClose();  // Wait for full socket close
+    
+      setTimeout(() => {
+        this.websocketSubscription = this.websocketService.connect(c_id, d_id, d_name)
+          .subscribe(
+            (message) => {
+              this.spinner = false;
+              console.log('Received message:', message);
+    
+              const AllData: any = JSON.parse(message);
+              this.wsData = AllData.lastdata;
+              this.WeatherData = AllData.lastdata;
+              this.livechart = AllData.last10row;
+              this.livechartForGraph = AllData.last10row;
+    
+              if (this.WeatherData) {
                 this.battery_status =
-                this.WeatherData.ac_vol1 > 0 ||
-                this.WeatherData.ac_vol2 > 0 ||
-                this.WeatherData.ac_vol3 > 0 ||
-                this.WeatherData.dc_vol1 > 0 ||
-                this.WeatherData.dc_vol2 > 0 ||
-                this.WeatherData.dc_vol3 > 0;
-
-                this.lastUpdateTime=''
-                this.lastUpdateTime=this.convertToISTDateTime(this.WeatherData.created_at)
-                console.log(this.lastUpdateTime);
-            }
-            if(this.livechart?.length>0){
-            this.livechartForGraph.sort((a, b) => {
-                    return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
-                  });
-            this.initCharts();
-            }
-            else{
-            this.initCharts();
-            }
-            // if(this.WeatherData){
-            //     this.sig_st=this.convertToPercentage(this.WeatherData.tw).toFixed(0-2)
-            // }
-            // this.dc1=parseFloat(this.wsData?.dc_vol1?this.wsData?.dc_vol1.toFixed(2):0);
-            // this.dc2=parseFloat(this.wsData?.dc_vol2?this.wsData?.dc_vol2.toFixed(2):0);
-            // this.dc3=parseFloat(this.wsData?.dc_vol3?this.wsData?.dc_vol3.toFixed(2):0);
-            // this.ac1=parseFloat(this.wsData?.ac_vol1?this.wsData?.ac_vol1.toFixed(2):0);
-            // this.ac2=parseFloat(this.wsData?.ac_vol2?this.wsData?.ac_vol2.toFixed(2):0);
-            // this.ac3=parseFloat(this.wsData?.ac_vol3?this.wsData?.ac_vol3.toFixed(2):0);
-
-            this.spinner=false;
-            // Handle received message here
-          },
-          (error) => {
-                if(error.status=='401'){
+                  this.WeatherData.ac_vol1 > 0 ||
+                  this.WeatherData.ac_vol2 > 0 ||
+                  this.WeatherData.ac_vol3 > 0 ||
+                  this.WeatherData.dc_vol1 > 0 ||
+                  this.WeatherData.dc_vol2 > 0 ||
+                  this.WeatherData.dc_vol3 > 0;
+    
+                this.lastUpdateTime = this.convertToISTDateTime(this.WeatherData.created_at);
+              }
+    
+              if (this.livechart?.length > 0) {
+                this.livechartForGraph.sort((a, b) =>
+                  new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+                );
+              }
+    
+              this.initCharts();
+            },
+            (error) => {
+              this.spinner = false;
+              console.error('WebSocket error:', error);
+              if (error.status == '401') {
                 this.router.navigate(['/']);
-                debugger
-                }
-                console.log(error.status);
-                this.spinner=false;
-                console.error('WebSocket error:', error);
-          },
-          () => {
-            this.spinner=false;
-            console.log('WebSocket connection closed');
-          }
-        );
-
+              }
+            },
+            () => {
+              this.spinner = false;
+              console.log('WebSocket connection closed');
+            }
+          );
+      }, 200); // short delay to give time for the previous close
     }
+    
     convertToPercentage(value: number): number {
         if (value < 0) {
           return 0;
