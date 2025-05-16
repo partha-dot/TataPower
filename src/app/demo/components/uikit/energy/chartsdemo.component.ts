@@ -171,6 +171,8 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
     selectedAlert:any
     alert_type:string='';
     battery_status:boolean=false;
+    battery_statusAC:boolean=false;
+    battery_statusDC:boolean=false;
     client_id:number=(+localStorage.getItem('c_id'));
 
     cities2:any=[
@@ -360,7 +362,19 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
                   this.WeatherData.dc_vol1 > 0 ||
                   this.WeatherData.dc_vol2 > 0 ||
                   this.WeatherData.dc_vol3 > 0;
-    
+
+                  this.battery_statusAC=
+                  this.WeatherData.ac_vol1 < 110 ||
+                  this.WeatherData.ac_vol2 < 110 ||
+                  this.WeatherData.ac_vol3 < 110;
+
+                  this.battery_statusDC=
+                  this.WeatherData.dc_vol1 < 12 ||
+                  this.WeatherData.dc_vol2 < 12 ||
+                  this.WeatherData.dc_vol3 < 12;
+
+                  console.log(this.battery_statusDC,this.battery_statusAC);
+                  
                 this.lastUpdateTime = this.convertToISTDateTime(this.WeatherData.created_at);
               }
     

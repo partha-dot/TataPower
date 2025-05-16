@@ -123,17 +123,25 @@
                             </div>
 
                             <div style="text-align:center;">
-                        <h5 style="color: white;"> Phase-I</h5></div>
+                        <h5 style="color: white;"> DC-I</h5></div>
                             </div>
                             <div class="grid">
                                 <div  class="col-12 lg:col-6 xl:col-4">
                                     <img src="assets/demo/images/icons/dc.png" alt="Image" height="80" width="80" style="padding-top: 10px; padding-left: 10%;">
 
                                 </div>
-                                <div  class="col-12 lg:col-6 xl:col-8">
+                                <div  class="col-12 lg:col-6 xl:col-4">
                                     <h2 style="padding-top:14%">
                                         {{WeatherData.dc_vol1}} (V)
                                     </h2>
+                                
+                                  
+                                </div>
+                                <div  class="col-12 lg:col-6 xl:col-4">
+                                    <b style="padding-top:14%">Status</b>
+                                    <img *ngIf="WeatherData.dc_vol1==0" src="assets/demo/images/icons/off.jpg" alt="Image" height="30" width="30" style="margin-top: 14%;">
+                                    <img *ngIf="WeatherData.dc_vol1>0" src="assets/demo/images/icons/on.jpg" alt="Image" height="30" width="30" style="margin-top: 14%;">
+
                                 </div>
                             </div>
 
@@ -159,17 +167,24 @@
                             </div>
 
                             <div style="text-align:center;">
-                        <h5 style="color: white;">  Phase-II</h5></div>
+                        <h5 style="color: white;">  DC-II</h5></div>
                             </div>
                             <div class="grid">
                                 <div  class="col-12 lg:col-6 xl:col-4">
                                     <img src="assets/demo/images/icons/dc.png" alt="Image" height="80" width="80" style="padding-top: 10px; padding-left: 10%;">
 
                                 </div>
-                                <div  class="col-12 lg:col-6 xl:col-8">
+                                <div  class="col-12 lg:col-6 xl:col-4">
                                     <h2 style="padding-top:14%">
                                         {{WeatherData.dc_vol2}} (V)
                                     </h2>
+                                   
+                                </div>
+                                <div  class="col-12 lg:col-6 xl:col-4">
+                                    <b style="padding-top:14%">Status</b>
+                                    <img *ngIf="WeatherData.dc_vol2==0" src="assets/demo/images/icons/off.jpg" alt="Image" height="30" width="30" style="margin-top: 14%;">
+                                    <img *ngIf="WeatherData.dc_vol2>0" src="assets/demo/images/icons/on.jpg" alt="Image" height="30" width="30" style="margin-top: 14%;">
+
                                 </div>
                             </div>
                             </div>
@@ -195,23 +210,31 @@
                             </div>
 
                             <div style="text-align:center;">
-                        <h5 style="color: white;">  Phase-III</h5></div>
+                        <h5 style="color: white;">  DC-III</h5></div>
                             </div>
                             <div class="grid">
                                 <div  class="col-12 lg:col-6 xl:col-4">
                                     <img src="assets/demo/images/icons/dc.png" alt="Image" height="80" width="80" style="padding-top: 10px; padding-left: 10%;">
 
                                 </div>
-                                <div  class="col-12 lg:col-6 xl:col-8">
+                                <div  class="col-12 lg:col-6 xl:col-4">
                                     <h2 style="padding-top:14%">
                                         {{WeatherData.dc_vol3}} (V)
                                     </h2>
+                                   
+                                </div>
+                                <div  class="col-12 lg:col-6 xl:col-4">
+                                    <b style="padding-top:14%">Status</b>
+                                    <img *ngIf="WeatherData.dc_vol3==0" src="assets/demo/images/icons/off.jpg" alt="Image" height="30" width="30" style="margin-top: 14%;">
+                                    <img *ngIf="WeatherData.dc_vol3>0" src="assets/demo/images/icons/on.jpg" alt="Image" height="30" width="30" style="margin-top: 14%;">
+
                                 </div>
                             </div>
 
                             </div>
 
                         </div>
+                        
 
                         <div class="col-12 lg:col-6 xl:col-4">
                             <div class="card mb-0" style="
@@ -232,17 +255,23 @@
                             </div>
 
                             <div style="text-align:center;">
-                                <h5 style="color: white;">Phase-I</h5></div>
+                                <h5 style="color: white;">AC-I</h5></div>
                             </div>
                             <div class="grid">
                                 <div  class="col-12 lg:col-6 xl:col-4">
                                     <img src="assets/demo/images/icons/ac.png" alt="Image" height="80" width="80" style="padding-top: 10px; padding-left: 10%;" >
 
                                 </div>
-                                <div  class="col-12 lg:col-6 xl:col-8">
+                                <div  class="col-12 lg:col-6 xl:col-4">
                                     <h2 style="padding-top:14%">
                                         {{WeatherData.ac_vol1}}  (V)
                                     </h2>
+                                </div>
+                                <div  class="col-12 lg:col-6 xl:col-4">
+                                    <b style="padding-top:14%">Status</b>
+                                    <img *ngIf="WeatherData.ac_vol1==0" src="assets/demo/images/icons/off.jpg" alt="Image" height="30" width="30" style="margin-top: 14%;">
+                                    <img *ngIf="WeatherData.ac_vol1>0" src="assets/demo/images/icons/on.jpg" alt="Image" height="30" width="30" style="margin-top: 14%;">
+
                                 </div>
                             </div>
 
@@ -271,17 +300,23 @@
                             </div>
 
                             <div style="text-align:center;">
-                            <h5 style="color: white;"> Phase-II</h5></div>
+                            <h5 style="color: white;"> AC-II</h5></div>
                             </div>
                             <div class="grid">
                                 <div  class="col-12 lg:col-6 xl:col-4">
                                     <img src="assets/demo/images/icons/ac.png" alt="Image" height="80" width="80" style="padding-top: 10px; padding-left: 10%;">
 
                                 </div>
-                                <div  class="col-12 lg:col-6 xl:col-8">
+                                <div  class="col-12 lg:col-6 xl:col-4">
                                     <h2 style="padding-top:14%">
                                         {{WeatherData.ac_vol2}} (V)
                                     </h2>
+                                </div>
+                                <div  class="col-12 lg:col-6 xl:col-4">
+                                    <b style="padding-top:14%">Status</b>
+                                    <img *ngIf="WeatherData.ac_vol2==0" src="assets/demo/images/icons/off.jpg" alt="Image" height="30" width="30" style="margin-top: 14%;">
+                                    <img *ngIf="WeatherData.ac_vol2>0" src="assets/demo/images/icons/on.jpg" alt="Image" height="30" width="30" style="margin-top: 14%;">
+
                                 </div>
                             </div>
                             </div>
@@ -307,23 +342,29 @@
                             </div>
 
                             <div style="text-align:center;">
-                        <h5 style="color: white;"> Phase-III</h5></div>
+                        <h5 style="color: white;">AC-III</h5></div>
                             </div>
                             <div class="grid">
                                 <div  class="col-12 lg:col-6 xl:col-4">
                                     <img src="assets/demo/images/icons/ac.png" alt="Image" height="80" width="80" style="padding-top: 10px; padding-left: 10%;">
 
                                 </div>
-                                <div  class="col-12 lg:col-6 xl:col-8">
+                                <div  class="col-12 lg:col-6 xl:col-4">
                                     <h2 style="padding-top:14%">
                                         {{WeatherData.ac_vol3}} (V)
                                     </h2>
+                                </div>
+                                <div  class="col-12 lg:col-6 xl:col-4">
+                                    <b style="padding-top:14%">Status</b>
+                                    <img *ngIf="WeatherData.ac_vol3==0" src="assets/demo/images/icons/off.jpg" alt="Image" height="30" width="30" style="margin-top: 14%;">
+                                    <img *ngIf="WeatherData.ac_vol3>0" src="assets/demo/images/icons/on.jpg" alt="Image" height="30" width="30" style="margin-top: 14%;">
+
                                 </div>
                             </div>
                             </div>
 
                         </div>
-
+                    
 
                         <!-- voltage -->
 
@@ -350,7 +391,7 @@
                             ></apx-chart>
                           </div>
                     </div> -->
-                    <!-- <div class="col-12 lg:col-6 xl:col-6">
+                    <!-- <div class="col-12 lg:col-6 xl:col-4">
 
                         <div class="card" style="height: 476px; overflow-x: hidden;
                         overflow-y: auto;">
@@ -436,7 +477,7 @@
                          <img src="assets/demo/images/icons/w_icon.png" alt="Image" height="160" >
                          <h6 style="padding-left: 30%;">Light Rain</h6>
                         </div>
-                         <div  class="col-12 lg:col-6 xl:col-6">
+                         <div  class="col-12 lg:col-6 xl:col-4">
                             <h1 style="padding-top:40%">
                                 {{wsData.temperature}}<sup>o</sup> C
                             </h1>

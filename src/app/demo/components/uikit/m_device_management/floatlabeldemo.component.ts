@@ -217,7 +217,10 @@ export class FloatLabelDemoComponent implements OnInit  {
                     e.dc_vol2 > 0 ||
                     e.dc_vol3 > 0;
             debugger
-            if(this.calculateDifference(e.weather_data_created_at)<=60){
+            
+            console.log(this.calculateDifference(e.data_created_at));
+            
+            if(this.calculateDifference(e.data_created_at)<=2){
                 e.status='Y';
                 this.totOnline+=1
             }

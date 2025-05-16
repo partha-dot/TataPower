@@ -4,6 +4,13 @@ body{
 }
 //battry
 $lightning-size: 12px;
+.onoff{
+  position: absolute;
+  z-index: 111;
+  top: 280px;
+  right: 100px;
+
+}
 
 .battery {
     top: -23px;
