@@ -411,6 +411,51 @@
 
                         </div>
                     </div> -->
+                    <div class="card" style="width: 100%;
+                                    margin-top: 20px;
+                                    margin-bottom: 50px;
+                                    height: 220px;">
+                                        <h5>Start-Stop</h5>
+                                        <br>
+                                      
+                                        <div class="grid p-fluid " >
+
+                                            <div class="col-12 lg:col-12 xl:col-1"  style="text-align: center;">
+
+                                                <div class="field">
+                                                    <label class="switch switch-green">
+                                                        <input type="checkbox" [checked]="do1"  class="switch-input" (change)="onCheckboxChange('do1', $event)">
+                                                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                        <span class="switch-handle"></span>
+                                                    </label>
+                                                </div>
+                                                <label>DO-1</label>
+                                            </div>
+                                            <div class="col-12 lg:col-12 xl:col-1" style="text-align: center;">
+
+                                                <div class="field">
+                                                    <label class="switch switch-green">
+                                                        <input type="checkbox" [checked]="do2"  class="switch-input" (change)="onCheckboxChange('do2', $event)">
+                                                        <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                        <span class="switch-handle"></span>
+                                                    </label>
+                                                </div>
+                                                <label>DO-2</label>
+                                            </div>
+                                            <div class="col-12 lg:col-12 xl:col-1" style="text-align: center;">
+
+                                                <div class="field">
+                                                    <label >
+                                                        <button class="button button1" (click)="sendData()">SEND</button>
+
+                                                    </label>
+                                                </div>
+                                                
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        
+                                    </div>
                     <div class=" card col-12 lg:col-6 xl:col-12">
 
                         <p-table
@@ -493,7 +538,7 @@
     <div></div>
     <div></div>
 </div><div class="overlay" *ngIf="spinner"></div>
-
+<p-toast></p-toast>
         </div>
     <!-- </div> -->
 

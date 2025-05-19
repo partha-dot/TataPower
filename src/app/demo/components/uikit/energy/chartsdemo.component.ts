@@ -213,6 +213,8 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
     livechart:any[]=[];
     livechartForGraph:any[]=[];
     weekdayName: any[]=[];
+   do1:boolean=false;
+    do2:boolean=false;
 
     dc1: any[]=[];
     dc2: any[]=[];
@@ -338,7 +340,8 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
     // }
     async connectToWebSocket(c_id: number, d_id: number, d_name: string) {
       this.spinner = true;
-    
+    this.do1 =  false;
+    this.do2 =  false;
       await this.websocketService.devsocketClose();  // Wait for full socket close
     
       setTimeout(() => {
@@ -373,10 +376,23 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
                   this.WeatherData.dc_vol2 < 12 ||
                   this.WeatherData.dc_vol3 < 12;
 
+
+
                   console.log(this.battery_statusDC,this.battery_statusAC);
                   
                 this.lastUpdateTime = this.convertToISTDateTime(this.WeatherData.created_at);
+                if(this.WeatherData.do_status){
+                    const statusDOArray = this.WeatherData.do_status.split('').map(char => char === '1');
+                    const statusDIArray = this.WeatherData.di_status.split('').map(char => char === '1');
+
+                    this.do1 = statusDOArray[0] || false;
+                    this.do2 = statusDOArray[1] || false;
+                }else{
+                  this.do1 =  false;
+                  this.do2 = false;
+                }
               }
+              
     
               if (this.livechart?.length > 0) {
                 this.livechartForGraph.sort((a, b) =>
@@ -778,6 +794,78 @@ export class ChartsDemoComponent implements OnInit, OnDestroy {
         }
         return series;
       }
+      onCheckboxChange(valve: string, event: Event) {
+        const getValveNumber = (valve: string): number => {
+            return parseInt(valve.replace('do', ''), 10);
+          };
+        const isChecked = (event.target as HTMLInputElement).checked;
+
+            if(isChecked){
+                this[valve] = isChecked;
+            }
+            else{
+                this[valve] = isChecked;
+            }
+
+          debugger
+        
+      }
+      sendData(){
+        //  this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Message published', life: 3000 });
+  const doStates = [];
+  for (let i = 1; i <= 2; i++) {
+    const key = `do${i}` as keyof this; // ensures TypeScript compatibility
+    const status = this[key] ? 2 : 1;
+    doStates.push({
+      do_no: i,
+      do_status: status
+    });
+  }
+
+  const payload = {
+    device:this.selectedDealer.device,
+    device_id:this.selectedDealer.device_id,
+    do: doStates
+  };
+  console.log(payload);
+  const apiUrl = this.api.baseUrl;
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+  this.spinner=true;
+  this.http.post(apiUrl+'/mqtt/publish_all_digital_output', payload,{ headers }).subscribe(
+      (res) => {
+        console.log(res);
+        this.spinner=false;
+        const response:any=res
+        if(response.status=="success"){
+            this.spinner=false;
+            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Message published', life: 3000 });
+        //   this.resetData();
+        debugger
+          }
+          else{
+            this.spinner=false;
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Data Related Issue!!', life: 3000 });
+          }
+
+
+      },
+      (error) => {
+        if(error.status=='401'){
+          this.router.navigate(['/']);
+
+         }
+        console.log(error.status);
+        this.spinner=false
+        if(error.status=='401'){
+          this.router.navigate(['/']);
+
+         }
+        console.log(error.status);
+      }
+    );
+  
+}
 
     ngOnDestroy() {
         // this.websocketService.devsocketClose();
